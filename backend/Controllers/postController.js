@@ -57,6 +57,7 @@ const createPost = asyncHandler(async (req, res) => {
 });
 
 
+
 const getPost = asyncHandler(async (req, res) => {
   try {
     // Retrieve all users from the database
