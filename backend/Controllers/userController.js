@@ -3,6 +3,9 @@ const Users = require("../Models/users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+// @desc fetch all user
+// @route GET /api/getuser
+// @access private (only admin can access)
 const getUsers = asyncHandler(async (req, res) => {
   if (req.user.is_Admin !== true) {
     return res.status(403).json({
@@ -20,6 +23,37 @@ const getUsers = asyncHandler(async (req, res) => {
       return res.status(404).json({
         success: false,
         message: "No users found",
+      });
+    }
+
+    // Respond with all users
+    res.status(200).json({
+      success: true,
+      data: users, // This will return all user details
+    });
+  } catch (err) {
+    // Handle any errors
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
+
+// @desc fetch himself
+// @route POST /api/getitself
+// @access private
+const getitself = asyncHandler(async (req, res) => {
+  try {
+    // Retrieve all users from the database
+    const users = await Users.find({ _id: req.user.id });
+
+    // Check if users are found
+    if (!users || users.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "user Not exist found",
       });
     }
 
@@ -147,7 +181,7 @@ const userLogin = asyncHandler(async (req, res) => {
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "59min" }
+      { expiresIn: "24hr" }
     );
 
     return res.status(200).json({
@@ -236,7 +270,7 @@ const userdelete = asyncHandler(async (req, res) => {
     });
   }
 
-  if (req.user.email !== email) {
+  if (req.user.email !== email && !req.user.is_Admin) {
     return res.status(403).json({
       success: false,
       message: "Forbidden: You are not allowed to update this user",
@@ -264,4 +298,5 @@ module.exports = {
   userupdate,
   userdelete,
   getUsers,
+  getitself,
 };

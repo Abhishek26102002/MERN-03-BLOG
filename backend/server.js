@@ -14,7 +14,12 @@ const PORT = process.env.PORT || 8080;
 // middleware to config routes
 app.use(express.json()); // Parse JSON body
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded body
-app.use(cors());
+app.use(cors({
+  origin: "*", // Or use '*' to allow all origins
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 app.get("/api/user", (req, res) => {

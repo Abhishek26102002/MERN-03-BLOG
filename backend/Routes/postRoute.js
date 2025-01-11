@@ -8,7 +8,8 @@ const {
   getbyid,
   upcount,
   getcategory,
-  getpostbycategoryname
+  getpostbycategoryname,
+  getpostusingid
 } = require("../Controllers/postController");
 const validateToken = require("../Middlewares/validateToken");
 
@@ -16,6 +17,8 @@ const router = express.Router();
 
 // every method here is jwt verified so no worries
 router.get("/getpost", getPost)
+
+router.get("/getpostusingid/:id",validateToken, getpostusingid)
 
 router.get("/getcategory", getcategory)
 

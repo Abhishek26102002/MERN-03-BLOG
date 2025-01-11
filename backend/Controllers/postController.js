@@ -7,6 +7,9 @@ const path = require("path");
 const Users = require("../Models/users");
 const fs = require("fs");
 
+// @desc create a post
+// @route POST /api/createpost
+// @access private (user Specific)
 const createPost = asyncHandler(async (req, res) => {
   try {
     if (!req.file) {
@@ -25,7 +28,9 @@ const createPost = asyncHandler(async (req, res) => {
     }
 
     // Public URL for the image
-    const imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+    const imageUrl = `${req.protocol}://${req.get("host")}/images/${
+      req.file.filename
+    }`;
     const userId = req.user.id;
 
     const newPost = await Blog.create({
@@ -56,8 +61,9 @@ const createPost = asyncHandler(async (req, res) => {
   }
 });
 
-
-
+// @desc Get All post Available
+// @route GET /api/getpost
+// @access public
 const getPost = asyncHandler(async (req, res) => {
   try {
     // Retrieve all users from the database
@@ -87,7 +93,9 @@ const getPost = asyncHandler(async (req, res) => {
   //get all Blog
 });
 
-// we are getting id by jwt token
+// @desc post by jwt token (we are getting id by jwt token) of specific user
+// @route POST /api/register
+// @access public
 const getbyid = asyncHandler(async (req, res) => {
   try {
     // Retrieve blogs created by a specific user
@@ -115,6 +123,43 @@ const getbyid = asyncHandler(async (req, res) => {
     });
   }
 });
+
+// @desc post by jwt token (we are getting id by jwt token) of specific user
+// @route POST /api/register
+// @access private
+const getpostusingid = asyncHandler(async (req, res) => {
+
+  try {
+    const { id } = req.params; // Blog ID from request parameters
+    // Retrieve blogs created by a specific user
+    const blogs = await Blog.find({ createdBy: id });
+
+    // Check if any blogs are found
+    if (!blogs || blogs.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No blogs found for this user",
+      });
+    }
+
+    // Respond with the retrieved blogs
+    res.status(200).json({
+      success: true,
+      data: blogs,
+    });
+  } catch (err) {
+    // Handle any errors
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
+
+// @desc get category
+// @route POST /api/getcategory
+// @access public
 const getcategory = asyncHandler(async (req, res) => {
   try {
     // Retrieve blogs created by a specific user
@@ -144,11 +189,14 @@ const getcategory = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc get post of specifi category (eg. fetch all post that belong to the category MCU)
+// @route POST /api/getpostbycategoryname
+// @access public
 const getpostbycategoryname = asyncHandler(async (req, res) => {
   const { category } = req.body;
 
   if (!category) {
-    return res.status(400).json({ error: 'Category is required' });
+    return res.status(400).json({ error: "Category is required" });
   }
 
   try {
@@ -179,6 +227,9 @@ const getpostbycategoryname = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc update post
+// @route PUT /api/update post
+// @access private
 // update Blog is by specific user we can do that either by jwt or by id but here jwt is best option
 // give jwt
 // give id as http string
@@ -207,12 +258,11 @@ const updatePost = asyncHandler(async (req, res) => {
 
     // Extract updatable fields from the request body
     const { title, blogText, category } = req.body;
-    let imagePath;
 
     // Handle image file if provided
-    if (req.file) {
-      imagePath = path.join("images", req.file.filename);
-    }
+    const imagePath = `${req.protocol}://${req.get("host")}/images/${
+      req.file.filename
+    }`;
 
     // Update the blog fields
     blog.title = title || blog.title;
@@ -241,10 +291,14 @@ const updatePost = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc delete post
+// @route POST /api/deletepost
+// @access private
 const deletePost = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params; // Blog ID from request parameters
     const userId = req.user.id; // Authenticated user ID from JWT
+    const isAdmin = req.user.is_Admin; // Check if the user is an admin
 
     // Find the blog by ID
     const blog = await Blog.findById(id);
@@ -256,8 +310,8 @@ const deletePost = asyncHandler(async (req, res) => {
       });
     }
 
-    // Check if the authenticated user is the creator of the blog
-    if (blog.createdBy.toString() !== userId) {
+    // Check if the authenticated user is the creator or an admin
+    if (blog.createdBy.toString() !== userId && !isAdmin) {
       return res.status(403).json({
         success: false,
         message: "Forbidden: You are not authorized to delete this blog",
@@ -289,6 +343,10 @@ const deletePost = asyncHandler(async (req, res) => {
   }
 });
 
+
+// @desc Like or unlike post
+// @route POST /api/upcount
+// @access private
 const upcount = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params; // Blog ID from request parameters
@@ -347,4 +405,5 @@ module.exports = {
   upcount,
   getcategory,
   getpostbycategoryname,
+  getpostusingid
 };

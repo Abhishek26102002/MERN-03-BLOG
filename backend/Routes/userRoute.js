@@ -6,6 +6,7 @@ const {
   userdelete,
   userRegister,
   getUsers,
+  getitself
 } = require("../Controllers/userController");
 
 const validateToken = require("../Middlewares/validateToken");
@@ -14,6 +15,8 @@ const router = express.Router();
 
 // user/Admin crud
 router.get("/getusers", validateToken, getUsers);
+
+router.get("/getitself", validateToken, getitself);
 
 router.post("/userlogin", userLogin);
 
