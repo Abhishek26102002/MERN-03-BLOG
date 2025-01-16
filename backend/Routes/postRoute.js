@@ -9,7 +9,8 @@ const {
   upcount,
   getcategory,
   getpostbycategoryname,
-  getpostusingid
+  getpostusingid,
+  getuserinfobypostid
 } = require("../Controllers/postController");
 const validateToken = require("../Middlewares/validateToken");
 
@@ -20,9 +21,11 @@ router.get("/getpost", getPost)
 
 router.get("/getpostusingid/:id",validateToken, getpostusingid)
 
+router.get("/getuserinfobypostid/:id", getuserinfobypostid)
+
 router.get("/getcategory", getcategory)
 
-router.get("/getpostbycategoryname", getpostbycategoryname)
+router.post("/getpostbycategoryname", getpostbycategoryname)
 
 
 router.get("/getpostbyid",validateToken,getbyid);

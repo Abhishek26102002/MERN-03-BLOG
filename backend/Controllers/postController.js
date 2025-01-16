@@ -128,7 +128,6 @@ const getbyid = asyncHandler(async (req, res) => {
 // @route POST /api/register
 // @access private
 const getpostusingid = asyncHandler(async (req, res) => {
-
   try {
     const { id } = req.params; // Blog ID from request parameters
     // Retrieve blogs created by a specific user
@@ -146,6 +145,35 @@ const getpostusingid = asyncHandler(async (req, res) => {
     res.status(200).json({
       success: true,
       data: blogs,
+    });
+  } catch (err) {
+    // Handle any errors
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
+
+// @desc
+// @route GET /api/register
+// @access public
+const getuserinfobypostid = asyncHandler(async (req, res) => {
+  try {
+    const user = await Users.find({ _id: req.params.id });
+    // Check if any blogs are found
+    if (!user || user.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No User for this post",
+      });
+    }
+
+    // Respond with the retrieved blogs
+    res.status(200).json({
+      success: true,
+      data: user,
     });
   } catch (err) {
     // Handle any errors
@@ -343,7 +371,6 @@ const deletePost = asyncHandler(async (req, res) => {
   }
 });
 
-
 // @desc Like or unlike post
 // @route POST /api/upcount
 // @access private
@@ -405,5 +432,6 @@ module.exports = {
   upcount,
   getcategory,
   getpostbycategoryname,
-  getpostusingid
+  getpostusingid,
+  getuserinfobypostid,
 };
