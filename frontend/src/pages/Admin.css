@@ -1,0 +1,124 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-bar {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.write-button {
+  padding: 8px 16px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.profile-content {
+  display: flex;
+  margin-top: 20px;
+  height: 100%;
+  flex-direction: row;
+}
+
+.blogs-section {
+  width: 80%;
+  margin-right: 20px;
+}
+
+.profile-sidebar {
+  margin-top: -40px;
+  width: 30%;
+ 
+  padding: 70px 0px;
+
+  text-align: center;
+  border-left: 1px solid #6f6f6f;
+
+}
+
+.profile-avatar {
+  margin-bottom: 10px;
+}
+
+.avatar-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.profile-info h4 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.profile-info p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.edit-profile-button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.join-date {
+  font-size: 12px;
+  color: #888;
+}
+.second {
+  display: flex;
+  flex-direction: row;
+  gap: 10;
+  justify-content: center;
+
+  width: 16%;
+  margin-right: 30px;
+}
+.secondtwo {
+  margin-top: 10px;
+
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 20%;
+}
+.FutureFunction {
+  border-radius: 47%;
+}
+.create {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btnAdmin {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 0px 50px;
+  margin: 30px 0px;
+}

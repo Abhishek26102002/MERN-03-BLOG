@@ -1,0 +1,143 @@
+/* Footer styling */
+footer {
+  background-color: #f8f9fa;
+}
+
+.social-icons a {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+  display: inline-block;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+  color: #007bff;
+}
+
+/* Animation class for social icons */
+.social-icon-enter {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.social-icon-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.social-icon-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.social-icon-exit-active {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 300ms, transform 300ms;
+}
+/* Footer.css */
+footer {
+  background-color: #f8f9fa;
+  padding: 2rem;
+}
+
+footer .btn-floating {
+  font-size: 1.5rem;
+  transition: transform 0.3s;
+}
+
+footer .btn-floating:hover {
+  transform: scale(1.1);
+}
+
+footer .form-outline input {
+  width: 100%;
+}
+
+footer .form-outline label {
+  position: absolute;
+  top: -6px;
+  left: 10px;
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+footer .btn-outline-primary {
+  background-color: transparent;
+  border: 1px solid #007bff;
+}
+
+footer .btn-outline-primary:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+/* Social Media Button Custom Styles */
+.social-icon {
+
+  width: 45px;
+  height: 45px;
+  border-radius: 40px;
+  transition: all 0.3s ease;
+}
+
+/* Facebook */
+.social-icon-facebook {
+  color: blue;
+}
+
+.social-icon-facebook:hover {
+  color: white;
+  background-color: #155fdb; /* Darker blue on hover */
+}
+
+/* Twitter */
+.social-icon-twitter {
+  color: #1da1f2;
+}
+
+.social-icon-twitter:hover {
+  color: #fff;
+  background-color: #1a91da; /* Slightly darker on hover */
+}
+
+/* Google */
+.social-icon-google {
+  background-color: #fff; /* Google red */
+  color: #222;
+}
+
+.social-icon-google:hover {
+  color: red;
+}
+
+/* Instagram */
+.social-icon-instagram {
+  background-color: #fff; /* Instagram pink */
+  color: black;
+}
+
+.social-icon-instagram:hover {
+  color: palevioletred;
+}
+
+/* LinkedIn */
+.social-icon-linkedin {
+  color: #0077b5;
+}
+
+.social-icon-linkedin:hover {
+  background-color: #0077b5; /* LinkedIn blue */
+  color: white;
+}
+
+/* Github */
+.social-icon-github:hover {
+  background-color: #333; /* Github black */
+  color: white;
+}
+
+.social-icon-github {
+  color: #222;
+  background-color: #fff; /* Darker black on hover */
+}

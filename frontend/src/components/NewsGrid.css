@@ -1,0 +1,25 @@
+.mainContaner {
+  height: 600px;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid blue;
+  padding: 50px;
+  margin: 50px;
+  justify-content: center;
+  align-items: center;
+}
+.leftContainer {
+  height: 550px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid green;
+}
+.rightCotainer {
+  height: 550px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+}

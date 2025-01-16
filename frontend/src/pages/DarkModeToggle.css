@@ -1,0 +1,17 @@
+body.dark-mode {
+  background-color: #212529; /* Dark background */
+  color: #f8f9fa; /* Light text color */
+}
+
+body.dark-mode .navbar,
+body.dark-mode .card {
+  background-color: #343a40; /* Dark navbar and card background */
+  color: #f8f9fa; /* Light text */
+}
+
+body.dark-mode .btn {
+  color: #212529;
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+  transition: all 0.3s ease;
+}
