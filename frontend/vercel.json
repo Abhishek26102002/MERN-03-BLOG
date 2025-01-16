@@ -1,9 +1,9 @@
 {
   "redirects": [
     {
-      "source": "/:path*",  // Match all paths
-      "destination": "/",   // Redirect to the root
-      "permanent": true     // Use 301 (true) or 308 (false)
+      "source": "/:path*",  
+      "destination": "/",  
+      "permanent": true  
     }
   ]
 }
